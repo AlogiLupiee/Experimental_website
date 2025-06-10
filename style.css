@@ -1,4 +1,4 @@
-/* --- Global Styles & Dark Mode Base (Default) --- */
+/* --- Global Variables & Default Dark Theme --- */
 :root {
     --primary-bg: #1a1a1a;
     --secondary-bg: #2c2c2c;
@@ -7,7 +7,7 @@
     --border-color: #444;
 }
 
-/* --- Light Mode Styles --- */
+/* --- Light Theme Variables --- */
 body.light-mode {
     --primary-bg: #f4f4f4;
     --secondary-bg: #ffffff;
@@ -15,6 +15,7 @@ body.light-mode {
     --border-color: #dddddd;
 }
 
+/* --- General Body & Typography --- */
 body {
     background-color: var(--primary-bg);
     color: var(--text-color);
@@ -41,19 +42,10 @@ a {
     text-decoration: none;
 }
 
-/* We will remove the underline on hover for the nav links specifically */
-
-
-/*
-===================================================================
-    NEW AND REWORKED NAVIGATION BAR SECTION
-===================================================================
-*/
-
-/* --- The Main Navbar Container --- */
+/* --- Navigation Bar --- */
 .navbar {
     background-color: var(--secondary-bg);
-    padding: 1rem 0; /* Give it some vertical padding */
+    padding: 1rem 0;
     border-bottom: 2px solid var(--border-color);
     position: sticky;
     top: 0;
@@ -67,54 +59,46 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px; /* Spacing between the buttons */
+    gap: 15px;
 }
 
-/* --- Base Style for ALL Navigation Buttons --- */
-/* This is the default, un-hovered state. The transition property is key here. */
 .navbar nav a {
-    display: inline-block; /* Makes the link behave like a block for padding */
+    display: inline-block;
     color: var(--text-color);
     font-weight: bold;
     font-size: 1.1em;
-    text-decoration: none; /* Remove underline */
-    padding: 12px 20px; /* This makes the buttons more "square" */
-    border-radius: 6px; /* Slightly rounded corners */
-    border: 2px solid transparent; /* An invisible border to prevent size jumps on hover */
-    /* This tells the browser to animate these properties over 0.2 seconds */
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: 2px solid transparent; /* Prevents layout shift on hover */
     transition: transform 0.2s ease-out, background-color 0.2s, border-color 0.2s;
 }
 
-/* --- The HOVER State --- */
-/* This rule applies ONLY when the mouse is over ANY nav link. */
+/* Hover state for nav links */
 .navbar nav a:hover {
     background-color: var(--accent-color);
     border-color: var(--accent-color);
-    /* translateY with a POSITIVE value moves the element DOWN */
     transform: translateY(4px);
 }
 
-/* --- The ACTIVE State --- */
-/* This rule applies ONLY to the link of the page you are currently on. */
-/* Notice there is NO transform here, so the active link doesn't move. */
+/* Active state for the current page's link */
 .navbar nav a.active {
-    background-color: #ffffff; /* A slightly different color to show it's active */
-    border-color: #ffffff;
+    background-color: #333;
+    border-color: #555;
 }
 
-/* --- Color Correction for Text --- */
-/* This rule makes the text color white on both hover and active states for high contrast. */
+/* Sets text to white for hovered and active links for better contrast */
 .navbar nav a:hover,
 .navbar nav a.active {
     color: #ffffff;
 }
 
-/* --- Theme Toggle Button Style (remains mostly the same) --- */
+/* --- Theme Toggle Button --- */
 #theme-toggle-btn {
     background-color: var(--text-color);
     color: var(--primary-bg);
     border: none;
-    padding: 14px 20px; /* Matched padding to other nav items */
+    padding: 14px 20px;
     font-size: 1em;
     font-weight: bold;
     border-radius: 6px;
@@ -122,7 +106,8 @@ a {
     transition: background-color 0.2s, color 0.2s;
 }
 
-/* --- Main Content Sections --- */
+
+/* --- Main Content Area --- */
 .main-content {
     background-color: var(--secondary-bg);
     padding: 30px;
@@ -131,7 +116,7 @@ a {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* --- Achievements Table (on index.html) --- */
+/* --- Achievements Table (index.html) --- */
 .achievements-table {
     width: 100%;
     border-collapse: collapse;
@@ -146,16 +131,12 @@ a {
 
 .achievements-table th {
     background-color: var(--accent-color);
-    color: var(--primary-bg);
+    color: #ffffff; /* Use white text for all themes */
     font-weight: bold;
 }
 
-/* Specific rule for light mode table header */
-body.light-mode .achievements-table th {
-    color: #ffffff;
-}
 
-/* --- Social Icons (on social.html) --- */
+/* --- Social Icons (social.html) --- */
 .social-links {
     list-style: none;
     padding: 0;
@@ -176,7 +157,7 @@ body.light-mode .achievements-table th {
     transform: scale(1.1);
 }
 
-/* --- Timeline (on timeline.html) --- */
+/* --- Timeline (timeline.html) --- */
 .timeline {
     position: relative;
     max-width: 800px;
@@ -201,14 +182,15 @@ body.light-mode .achievements-table th {
     box-sizing: border-box;
 }
 
+/* Position items on the left and right */
 .timeline-item:nth-child(odd) {
     left: 0;
 }
-
 .timeline-item:nth-child(even) {
     left: 50%;
 }
 
+/* Timeline circles */
 .timeline-item::after {
     content: '';
     position: absolute;
@@ -221,7 +203,6 @@ body.light-mode .achievements-table th {
     border-radius: 50%;
     z-index: 1;
 }
-
 .timeline-item:nth-child(even)::after {
     left: -9px;
 }
