@@ -74,7 +74,12 @@ a:hover {
     transition: background-color 0.2s, color 0.2s, transform 0.2s ease-in-out;
 }
 
-.navbar nav a.active,
+.navbar nav a.active {
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+    text-decoration: none;
+}
+
 .navbar nav a:hover {
     background-color: var(--accent-color);
     color: var(--primary-bg);
@@ -82,7 +87,6 @@ a:hover {
     transform: translateY(-4px);
 }
 
-/* Specific rule for light mode active links */
 body.light-mode .navbar nav a.active,
 body.light-mode .navbar nav a:hover {
     color: #ffffff;
