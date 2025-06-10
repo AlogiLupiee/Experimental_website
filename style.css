@@ -103,16 +103,10 @@ a {
 }
 
 /* --- Color Correction for Text --- */
-/* This rule makes the text color change on both hover and active states */
+/* This rule makes the text color white on both hover and active states for high contrast. */
 .navbar nav a:hover,
 .navbar nav a.active {
-    color: var(--primary-bg); /* Use the main background color for the text */
-}
-
-/* Specific color correction for light mode to ensure contrast */
-body.light-mode .navbar nav a:hover,
-body.light-mode .navbar nav a.active {
-    color: #ffffff; /* On light mode, the text on the blue button should be white */
+    color: #ffffff;
 }
 
 /* --- Theme Toggle Button Style (remains mostly the same) --- */
