@@ -124,6 +124,16 @@ body.light-mode .navbar nav a.active {
     transform: translateY(4px); /* Keeps the button-press effect */
 }
 
+/* --- START OF FIX --- */
+/* This more specific rule ensures the hover effect also works in light mode. */
+body.light-mode .navbar nav a:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #ffffff;
+}
+/* --- END OF FIX --- */
+
+
 /*
 ============================================
     END OF NEW NAVIGATION STYLES
