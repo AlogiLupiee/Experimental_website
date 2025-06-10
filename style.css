@@ -62,7 +62,7 @@ a {
     gap: 15px;
 }
 
-/* Base style for nav links */
+/* Base properties for ALL nav links */
 .navbar nav a {
     display: inline-block;
     font-weight: bold;
@@ -70,47 +70,65 @@ a {
     text-decoration: none;
     padding: 12px 20px;
     border-radius: 6px;
-    border: 2px solid transparent;
+    border: 2px solid transparent; /* Prevents layout shift on state change */
     transition: transform 0.2s ease-out, background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
+/* 
+============================================
+    NEW NAVIGATION BUTTON STYLES
+============================================
+*/
 
-/* --- START OF THE NEW CHANGE --- */
+/* --- DARK MODE STYLES (DEFAULT) --- */
 
-/* Default nav link style for DARK MODE: White button, black text */
+/* Default Button: Black with white text */
 .navbar nav a {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-/* Default nav link style for LIGHT MODE: Transparent button, dark text */
-body.light-mode .navbar nav a {
-    background-color: transparent; /* This is the new line */
-    color: #333333;
-}
-
-/* --- END OF THE NEW CHANGE --- */
-
-
-/* Hover state for nav links */
-.navbar nav a:hover {
-    background-color: var(--accent-color);
-    border-color: var(--accent-color);
-    transform: translateY(4px);
-}
-
-/* Active state for the current page's link */
-.navbar nav a.active {
-    background-color: #333;
+    background-color: #333; /* Dark gray, almost black */
     border-color: #555;
-}
-
-/* On hover or active, text is ALWAYS white for high contrast */
-.navbar nav a:hover,
-.navbar nav a.active {
     color: #ffffff;
 }
 
+/* Active Button: White with black text */
+.navbar nav a.active {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #000000;
+}
+
+
+/* --- LIGHT MODE STYLES --- */
+
+/* Default Button: White with black text */
+body.light-mode .navbar nav a {
+    background-color: #ffffff;
+    border-color: #cccccc; /* A subtle border so it's visible on the white navbar */
+    color: #000000;
+}
+
+/* Active Button: Black with white text */
+body.light-mode .navbar nav a.active {
+    background-color: #333;
+    border-color: #333;
+    color: #ffffff;
+}
+
+
+/* --- HOVER STYLE (Applies to BOTH modes) --- */
+
+/* Hovered Button: Blue with white text */
+.navbar nav a:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #ffffff;
+    transform: translateY(4px); /* Keeps the button-press effect */
+}
+
+/*
+============================================
+    END OF NEW NAVIGATION STYLES
+============================================
+*/
 
 /* --- Theme Toggle Button --- */
 #theme-toggle-btn {
