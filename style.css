@@ -98,8 +98,8 @@ a {
 /* This rule applies ONLY to the link of the page you are currently on. */
 /* Notice there is NO transform here, so the active link doesn't move. */
 .navbar nav a.active {
-    background-color: #333; /* A slightly different color to show it's active */
-    border-color: #555;
+    background-color: #ffffff; /* A slightly different color to show it's active */
+    border-color: #ffffff;
 }
 
 /* --- Color Correction for Text --- */
@@ -127,14 +127,6 @@ body.light-mode .navbar nav a.active {
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
 }
-
-
-/*
-===================================================================
-    END OF NAVIGATION BAR SECTION
-===================================================================
-*/
-
 
 /* --- Main Content Sections --- */
 .main-content {
