@@ -41,14 +41,19 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
-}
+/* We will remove the underline on hover for the nav links specifically */
 
-/* --- Navigation Bar --- */
+
+/*
+===================================================================
+    NEW AND REWORKED NAVIGATION BAR SECTION
+===================================================================
+*/
+
+/* --- The Main Navbar Container --- */
 .navbar {
     background-color: var(--secondary-bg);
-    padding: 1rem;
+    padding: 1rem 0; /* Give it some vertical padding */
     border-bottom: 2px solid var(--border-color);
     position: sticky;
     top: 0;
@@ -62,47 +67,74 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 15px; /* Spacing between the buttons */
 }
 
+/* --- Base Style for ALL Navigation Buttons --- */
+/* This is the default, un-hovered state. The transition property is key here. */
 .navbar nav a {
+    display: inline-block; /* Makes the link behave like a block for padding */
     color: var(--text-color);
     font-weight: bold;
     font-size: 1.1em;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.2s, color 0.2s, transform 0.2s ease-in-out;
+    text-decoration: none; /* Remove underline */
+    padding: 12px 20px; /* This makes the buttons more "square" */
+    border-radius: 6px; /* Slightly rounded corners */
+    border: 2px solid transparent; /* An invisible border to prevent size jumps on hover */
+    /* This tells the browser to animate these properties over 0.2 seconds */
+    transition: transform 0.2s ease-out, background-color 0.2s, border-color 0.2s;
 }
 
-.navbar nav a.active {
-    background-color: var(--accent-color);
-    color: var(--primary-bg);
-    text-decoration: none;
-}
-
+/* --- The HOVER State --- */
+/* This rule applies ONLY when the mouse is over ANY nav link. */
 .navbar nav a:hover {
     background-color: var(--accent-color);
-    color: var(--primary-bg);
-    text-decoration: none;
-    transform: translateY(-4px);
+    border-color: var(--accent-color);
+    /* translateY with a POSITIVE value moves the element DOWN */
+    transform: translateY(4px);
 }
 
-body.light-mode .navbar nav a.active,
-body.light-mode .navbar nav a:hover {
-    color: #ffffff;
+/* --- The ACTIVE State --- */
+/* This rule applies ONLY to the link of the page you are currently on. */
+/* Notice there is NO transform here, so the active link doesn't move. */
+.navbar nav a.active {
+    background-color: #333; /* A slightly different color to show it's active */
+    border-color: #555;
 }
 
-/* Theme Toggle Button Style */
+/* --- Color Correction for Text --- */
+/* This rule makes the text color change on both hover and active states */
+.navbar nav a:hover,
+.navbar nav a.active {
+    color: var(--primary-bg); /* Use the main background color for the text */
+}
+
+/* Specific color correction for light mode to ensure contrast */
+body.light-mode .navbar nav a:hover,
+body.light-mode .navbar nav a.active {
+    color: #ffffff; /* On light mode, the text on the blue button should be white */
+}
+
+/* --- Theme Toggle Button Style (remains mostly the same) --- */
 #theme-toggle-btn {
     background-color: var(--text-color);
     color: var(--primary-bg);
     border: none;
-    padding: 5px 10px;
+    padding: 14px 20px; /* Matched padding to other nav items */
     font-size: 1em;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
 }
+
+
+/*
+===================================================================
+    END OF NAVIGATION BAR SECTION
+===================================================================
+*/
+
 
 /* --- Main Content Sections --- */
 .main-content {
