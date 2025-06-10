@@ -62,17 +62,35 @@ a {
     gap: 15px;
 }
 
+/* Base style for nav links */
 .navbar nav a {
     display: inline-block;
-    color: var(--text-color);
     font-weight: bold;
     font-size: 1.1em;
     text-decoration: none;
     padding: 12px 20px;
     border-radius: 6px;
-    border: 2px solid transparent; /* Prevents layout shift on hover */
-    transition: transform 0.2s ease-out, background-color 0.2s, border-color 0.2s;
+    border: 2px solid transparent;
+    transition: transform 0.2s ease-out, background-color 0.2s, border-color 0.2s, color 0.2s;
 }
+
+
+/* --- START OF THE NEW CHANGE --- */
+
+/* Default nav link style for DARK MODE: White button, black text */
+.navbar nav a {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Default nav link style for LIGHT MODE: Transparent button, dark text */
+body.light-mode .navbar nav a {
+    background-color: transparent; /* This is the new line */
+    color: #333333;
+}
+
+/* --- END OF THE NEW CHANGE --- */
+
 
 /* Hover state for nav links */
 .navbar nav a:hover {
@@ -87,11 +105,12 @@ a {
     border-color: #555;
 }
 
-/* Sets text to white for hovered and active links for better contrast */
+/* On hover or active, text is ALWAYS white for high contrast */
 .navbar nav a:hover,
 .navbar nav a.active {
     color: #ffffff;
 }
+
 
 /* --- Theme Toggle Button --- */
 #theme-toggle-btn {
@@ -131,7 +150,7 @@ a {
 
 .achievements-table th {
     background-color: var(--accent-color);
-    color: #ffffff; /* Use white text for all themes */
+    color: #ffffff;
     font-weight: bold;
 }
 
@@ -182,7 +201,6 @@ a {
     box-sizing: border-box;
 }
 
-/* Position items on the left and right */
 .timeline-item:nth-child(odd) {
     left: 0;
 }
@@ -190,7 +208,6 @@ a {
     left: 50%;
 }
 
-/* Timeline circles */
 .timeline-item::after {
     content: '';
     position: absolute;
