@@ -60,21 +60,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- SCROLL ANIMATION LOGIC ---
-    // This will work after you do a hard refresh (Ctrl+Shift+R)
+    // --- UPDATED: REPEATING SCROLL ANIMATION LOGIC ---
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
     if (revealElements.length > 0) {
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.1 // Triggers when 10% of the element is visible
+            threshold: 0.1 
         };
 
-        const observer = new IntersectionObserver((entries, observer) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                // If the element is intersecting (entering) the viewport
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+                } 
+                // Else (the element is leaving the viewport)
+                else {
+                    entry.target.classList.remove('visible');
                 }
             });
         }, observerOptions);
