@@ -19,9 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Check localStorage for a saved theme when the page loads
-    const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to 'dark' if nothing is saved
+    const savedTheme = localStorage.getItem('theme') || 'dark';
     applyTheme(savedTheme);
-
 
     // The click event listener now also saves the choice to localStorage
     if (themeToggleButton) {
@@ -38,11 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- UPDATED: BACK TO TOP BUTTON LOGIC ---
+    // --- BACK TO TOP BUTTON LOGIC ---
     const backToTopButton = document.getElementById('back-to-top-btn');
 
     if (backToTopButton) {
-        // Show button when user scrolls down
         window.onscroll = () => {
             if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
                 backToTopButton.classList.add('visible');
@@ -51,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Scroll smoothly to top when button is clicked
         backToTopButton.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -59,8 +56,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    
+    // --- NEW: MOBILE NAVIGATION LOGIC ---
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
 
-    // --- UPDATED: REPEATING SCROLL ANIMATION LOGIC ---
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('.nav-links li a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+
+    // --- REPEATING SCROLL ANIMATION LOGIC ---
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
     if (revealElements.length > 0) {
         const observerOptions = {
@@ -71,11 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // If the element is intersecting (entering) the viewport
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 } 
-                // Else (the element is leaving the viewport)
                 else {
                     entry.target.classList.remove('visible');
                 }

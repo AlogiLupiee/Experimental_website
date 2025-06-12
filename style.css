@@ -45,14 +45,26 @@ a {
 /* --- Navigation Bar --- */
 .navbar {
     background-color: var(--secondary-bg);
-    padding: 1rem 0;
+    padding: 1rem 20px; /* Added horizontal padding */
     border-bottom: 2px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 1000;
+    /* Added for containing the hamburger menu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.navbar nav ul {
+.navbar nav {
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar .nav-links {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -63,55 +75,49 @@ a {
 }
 
 /* Base properties for ALL nav links */
-.navbar nav a {
+.navbar .nav-links a {
     display: inline-block;
     font-weight: bold;
     font-size: 1.1em;
     text-decoration: none;
     padding: 12px 20px;
     border-radius: 6px;
-    border: 2px solid transparent; /* Prevents layout shift on state change */
+    border: 2px solid transparent;
     transition: transform 0.2s ease-out, background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
-/* 
-============================================
-    NAVIGATION BUTTON STYLES
-============================================
-*/
-
 /* --- DARK MODE STYLES (DEFAULT) --- */
-.navbar nav a {
+.navbar .nav-links a {
     background-color: #333;
     border-color: #555;
     color: #ffffff;
 }
-.navbar nav a.active {
+.navbar .nav-links a.active {
     background-color: #ffffff;
     border-color: #ffffff;
     color: #000000;
 }
 
 /* --- LIGHT MODE STYLES --- */
-body.light-mode .navbar nav a {
+body.light-mode .navbar .nav-links a {
     background-color: #ffffff;
     border-color: #cccccc;
     color: #000000;
 }
-body.light-mode .navbar nav a.active {
+body.light-mode .navbar .nav-links a.active {
     background-color: #333;
     border-color: #333;
     color: #ffffff;
 }
 
-/* --- HOVER STYLE (Applies to BOTH modes) --- */
-.navbar nav a:hover {
+/* --- HOVER STYLE --- */
+.navbar .nav-links a:hover {
     background-color: var(--accent-color);
     border-color: var(--accent-color);
     color: #ffffff;
     transform: translateY(4px);
 }
-body.light-mode .navbar nav a:hover {
+body.light-mode .navbar .nav-links a:hover {
     background-color: var(--accent-color);
     border-color: var(--accent-color);
     color: #ffffff;
@@ -141,10 +147,14 @@ body.light-mode .navbar nav a:hover {
 }
 
 /* --- Achievements Table (index.html) --- */
+.table-container { /* New container for horizontal scroll */
+    overflow-x: auto;
+    margin-top: 20px;
+}
 .achievements-table {
     width: 100%;
+    min-width: 600px; /* Prevents squishing on mobile */
     border-collapse: collapse;
-    margin-top: 20px;
 }
 .achievements-table th, .achievements-table td {
     border: 1px solid var(--border-color);
@@ -226,12 +236,6 @@ body.light-mode .navbar nav a:hover {
     border-radius: 6px;
 }
 
-/* 
-============================================
-    NEW FEATURES
-============================================
-*/
-
 /* --- Footer --- */
 .site-footer {
     text-align: center;
@@ -244,14 +248,13 @@ body.light-mode .navbar nav a:hover {
     transition: border-color 0.3s, background-color 0.3s;
 }
 
-/* --- NEW Back to Top Button --- */
+/* --- Back to Top Button --- */
 #back-to-top-btn {
     position: fixed;
-    top: 90px; /* Position it below the navbar */
+    top: 90px;
     left: 50%;
-    transform: translate(-50%, -20px); /* Center it and move it up slightly */
-    z-index: 999; /* Below navbar but above content */
-    
+    transform: translate(-50%, -20px);
+    z-index: 999;
     background-color: var(--accent-color);
     color: white;
     font-weight: bold;
@@ -260,20 +263,15 @@ body.light-mode .navbar nav a:hover {
     padding: 10px 20px;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-
-    /* Animation properties */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s;
 }
-
-/* This class will be toggled by JavaScript */
 #back-to-top-btn.visible {
     opacity: 1;
     visibility: visible;
-    transform: translate(-50%, 0); /* Move it to its final position */
+    transform: translate(-50%, 0);
 }
-
 #back-to-top-btn:hover {
     background-color: #0088cc;
 }
@@ -287,4 +285,89 @@ body.light-mode .navbar nav a:hover {
 .reveal-on-scroll.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* 
+============================================
+    Responsive & Mobile Styles
+============================================
+*/
+.hamburger {
+    display: none; /* Hidden on desktop */
+    cursor: pointer;
+}
+.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--text-color);
+    transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        justify-content: space-between; /* Align logo/title and hamburger */
+    }
+
+    .hamburger {
+        display: block; /* Show hamburger on mobile */
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0; /* Middle bar fades out */
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg); /* Top bar animates to / */
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg); /* Bottom bar animates to \ */
+    }
+
+    .nav-links {
+        position: fixed;
+        left: -100%; /* Start off-screen */
+        top: 85px; /* Position below the navbar */
+        gap: 0;
+        flex-direction: column;
+        background-color: var(--secondary-bg);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .nav-links.active {
+        left: 0; /* Slide in */
+    }
+
+    .nav-links li {
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .nav-links a {
+        width: 80%; /* Make buttons take up more space */
+        margin: 5px auto;
+    }
+
+    /* Make the timeline a single column */
+    .timeline::before {
+        left: 20px;
+    }
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        left: 0;
+    }
+    .timeline-item::after {
+        left: 10px;
+    }
+
+    .social-links a {
+        font-size: 3em; /* Slightly smaller icons */
+    }
 }
