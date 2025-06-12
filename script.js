@@ -38,18 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- NEW: BACK TO TOP BUTTON LOGIC ---
+    // --- UPDATED: BACK TO TOP BUTTON LOGIC ---
     const backToTopButton = document.getElementById('back-to-top-btn');
 
     if (backToTopButton) {
+        // Show button when user scrolls down
         window.onscroll = () => {
             if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                backToTopButton.style.display = "block";
+                backToTopButton.classList.add('visible');
             } else {
-                backToTopButton.style.display = "none";
+                backToTopButton.classList.remove('visible');
             }
         };
 
+        // Scroll smoothly to top when button is clicked
         backToTopButton.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -58,13 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- NEW: SCROLL ANIMATION LOGIC ---
+    // --- SCROLL ANIMATION LOGIC ---
+    // This will work after you do a hard refresh (Ctrl+Shift+R)
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
     if (revealElements.length > 0) {
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.1
+            threshold: 0.1 // Triggers when 10% of the element is visible
         };
 
         const observer = new IntersectionObserver((entries, observer) => {
