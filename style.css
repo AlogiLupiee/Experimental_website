@@ -15,6 +15,15 @@ body.light-mode {
     --border-color: #dddddd;
 }
 
+/* --- Easter Egg Theme Variables --- */
+body.easter-egg-mode {
+    --primary-bg: #8B0000;      /* Dark Red */
+    --secondary-bg: #7a0000;    /* A bit darker red for content boxes */
+    --text-color: #f0e68c;      /* Khaki / Cream for text */
+    --accent-color: #5C4033;    /* Dark Brown for headings/links */
+    --border-color: #4a3328;    /* A darker brown for borders */
+}
+
 /* --- General Body & Typography --- */
 body {
     background-color: var(--primary-bg);
@@ -45,12 +54,11 @@ a {
 /* --- Navigation Bar --- */
 .navbar {
     background-color: var(--secondary-bg);
-    padding: 1rem 20px; /* Added horizontal padding */
+    padding: 1rem 20px;
     border-bottom: 2px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 1000;
-    /* Added for containing the hamburger menu */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -123,6 +131,24 @@ body.light-mode .navbar .nav-links a:hover {
     color: #ffffff;
 }
 
+/* --- Easter Egg Button Overrides --- */
+body.easter-egg-mode .navbar .nav-links a {
+    background-color: #5C4033; /* Dark Brown */
+    border-color: #4a3328;
+    color: #f0e68c;
+}
+body.easter-egg-mode .navbar .nav-links a.active {
+    background-color: #f0e68c; /* Khaki */
+    border-color: #f0e68c;
+    color: #5C4033; /* Dark Brown Text */
+}
+body.easter-egg-mode .navbar .nav-links a:hover {
+    background-color: #f0e68c;
+    border-color: #f0e68c;
+    color: #5C4033;
+}
+
+
 /* --- Theme Toggle Button --- */
 #theme-toggle-btn {
     background-color: var(--text-color);
@@ -147,13 +173,13 @@ body.light-mode .navbar .nav-links a:hover {
 }
 
 /* --- Achievements Table (index.html) --- */
-.table-container { /* New container for horizontal scroll */
+.table-container {
     overflow-x: auto;
     margin-top: 20px;
 }
 .achievements-table {
     width: 100%;
-    min-width: 600px; /* Prevents squishing on mobile */
+    min-width: 600px;
     border-collapse: collapse;
 }
 .achievements-table th, .achievements-table td {
@@ -165,6 +191,9 @@ body.light-mode .navbar .nav-links a:hover {
     background-color: var(--accent-color);
     color: #ffffff;
     font-weight: bold;
+}
+body.easter-egg-mode .achievements-table th {
+    color: #f0e68c; /* Makes header text in table readable */
 }
 
 
@@ -247,6 +276,10 @@ body.light-mode .navbar .nav-links a:hover {
     background-color: var(--primary-bg);
     transition: border-color 0.3s, background-color 0.3s;
 }
+body.easter-egg-mode .site-footer {
+    color: #d3c781; /* Brighter footer text for easter egg mode */
+}
+
 
 /* --- Back to Top Button --- */
 #back-to-top-btn {
@@ -275,6 +308,12 @@ body.light-mode .navbar .nav-links a:hover {
 #back-to-top-btn:hover {
     background-color: #0088cc;
 }
+body.easter-egg-mode #back-to-top-btn {
+    color: #f0e68c;
+}
+body.easter-egg-mode #back-to-top-btn:hover {
+    background-color: #4a3328;
+}
 
 /* --- Scroll Animation --- */
 .reveal-on-scroll {
@@ -293,7 +332,7 @@ body.light-mode .navbar .nav-links a:hover {
 ============================================
 */
 .hamburger {
-    display: none; /* Hidden on desktop */
+    display: none;
     cursor: pointer;
 }
 .hamburger .bar {
@@ -307,27 +346,24 @@ body.light-mode .navbar .nav-links a:hover {
 
 @media (max-width: 768px) {
     .navbar {
-        justify-content: space-between; /* Align logo/title and hamburger */
+        justify-content: space-between;
     }
-
     .hamburger {
-        display: block; /* Show hamburger on mobile */
+        display: block;
     }
-
     .hamburger.active .bar:nth-child(2) {
-        opacity: 0; /* Middle bar fades out */
+        opacity: 0;
     }
     .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg); /* Top bar animates to / */
+        transform: translateY(8px) rotate(45deg);
     }
     .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg); /* Bottom bar animates to \ */
+        transform: translateY(-8px) rotate(-45deg);
     }
-
     .nav-links {
         position: fixed;
-        left: -100%; /* Start off-screen */
-        top: 85px; /* Position below the navbar */
+        left: -100%;
+        top: 85px;
         gap: 0;
         flex-direction: column;
         background-color: var(--secondary-bg);
@@ -335,22 +371,17 @@ body.light-mode .navbar .nav-links a:hover {
         text-align: center;
         transition: 0.3s;
     }
-
     .nav-links.active {
-        left: 0; /* Slide in */
+        left: 0;
     }
-
     .nav-links li {
         width: 100%;
         padding: 10px 0;
     }
-
     .nav-links a {
-        width: 80%; /* Make buttons take up more space */
+        width: 80%;
         margin: 5px auto;
     }
-
-    /* Make the timeline a single column */
     .timeline::before {
         left: 20px;
     }
@@ -366,8 +397,7 @@ body.light-mode .navbar .nav-links a:hover {
     .timeline-item::after {
         left: 10px;
     }
-
     .social-links a {
-        font-size: 3em; /* Slightly smaller icons */
+        font-size: 3em;
     }
 }
