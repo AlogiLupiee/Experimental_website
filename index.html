@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alogi - Home</title>
     <link rel="stylesheet" href="style.css">
+    <!-- NEW: GitHub Calendar Libraries -->
+    <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"/>
 </head>
 <body>
     <button id="back-to-top-btn" title="Go to top">▲</button>
@@ -29,7 +32,7 @@
         <main class="main-content">
             <h1>Welcome!</h1>
             <p>
-                Hello! My name's Adam, you may also know me as Alogi or Lupieevee. This page is currently under construction! 🚧
+                Hello! My name's Adam, you may also know me as Alogi or Lupieevee.
             </p>
             <p>
                 Here, you'll find information about me, my projects, my timeline and find links to my social media. Feel free to explore the different sections using the navigation bar above.
@@ -59,6 +62,31 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- ====================================== -->
+            <!--   NEW GITHUB INTEGRATION CONTENT START   -->
+            <!-- ====================================== -->
+
+            <h2>My GitHub Profile</h2>
+            <div id="github-profile-card">
+                <!-- Profile info will be inserted here by JavaScript -->
+                <p>Loading GitHub profile...</p>
+            </div>
+
+            <h2>Latest Repositories</h2>
+            <div id="github-repos-container">
+                <!-- Repository cards will be inserted here by JavaScript -->
+                <p>Loading repositories...</p>
+            </div>
+
+            <h2>GitHub Activity</h2>
+            <!-- The calendar will be rendered here -->
+            <div class="calendar">Loading...</div>
+            
+            <!-- ==================================== -->
+            <!--   NEW GITHUB INTEGRATION CONTENT END   -->
+            <!-- ==================================== -->
+
         </main>
     </div>
 

@@ -12,52 +12,35 @@ document.addEventListener('DOMContentLoaded', () => {
         if (theme === 'light') {
             body.classList.remove('easter-egg-mode');
             body.classList.add('light-mode');
-            if (themeToggleButton) {
-                themeToggleButton.textContent = 'Dark Mode';
-            }
+            if (themeToggleButton) themeToggleButton.textContent = 'Dark Mode';
         } else { // 'dark'
             body.classList.remove('easter-egg-mode');
             body.classList.remove('light-mode');
-            if (themeToggleButton) {
-                themeToggleButton.textContent = 'Light Mode';
-            }
+            if (themeToggleButton) themeToggleButton.textContent = 'Light Mode';
         }
     };
 
-    // Check localStorage for a saved theme when the page loads
     const savedTheme = localStorage.getItem('theme') || 'dark';
     applyTheme(savedTheme);
 
-    // The click event listener
     if (themeToggleButton) {
         themeToggleButton.addEventListener('click', () => {
-            // --- Easter Egg Logic ---
             clearTimeout(clickTimer);
             clickCount++;
-
-            // If we are already in the secret mode, a single click should exit it.
             if (body.classList.contains('easter-egg-mode')) {
                 body.classList.remove('easter-egg-mode');
                 clickCount = 0;
-                const lastTheme = localStorage.getItem('theme') || 'dark';
-                applyTheme(lastTheme);
+                applyTheme(localStorage.getItem('theme') || 'dark');
                 return;
             }
-            
-            // Check if we've reached the activation count
             if (clickCount === 6) {
-                clickCount = 0; // Reset counter
+                clickCount = 0;
                 body.classList.add('easter-egg-mode');
-                themeToggleButton.textContent = "???"; // Fun text for the button
+                themeToggleButton.textContent = "???";
                 return; 
             }
+            clickTimer = setTimeout(() => { clickCount = 0; }, 500);
 
-            // Set a timer to reset the count if clicks aren't rapid enough (500ms)
-            clickTimer = setTimeout(() => {
-                clickCount = 0;
-            }, 500);
-
-            // --- Original Theme Toggle Logic ---
             const isLightMode = body.classList.contains('light-mode');
             if (isLightMode) {
                 localStorage.setItem('theme', 'dark');
@@ -79,9 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 backToTopButton.classList.remove('visible');
             }
         };
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        backToTopButton.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
     }
     
     // --- MOBILE NAVIGATION LOGIC ---
@@ -103,16 +84,70 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- REPEATING SCROLL ANIMATION LOGIC ---
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
     if (revealElements.length > 0) {
-        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                } else {
-                    entry.target.classList.remove('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+                else entry.target.classList.remove('visible');
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
         revealElements.forEach(el => { observer.observe(el); });
+    }
+
+    // --- GITHUB INTEGRATION (for index.html) ---
+    const githubUsername = 'AlogiLupiee';
+    const profileCardContainer = document.getElementById('github-profile-card');
+    const reposContainer = document.getElementById('github-repos-container');
+    const calendarContainer = document.querySelector('.calendar');
+
+    // GitHub Activity Calendar
+    if (calendarContainer) {
+        GitHubCalendar(".calendar", githubUsername, {
+            responsive: true,
+            tooltips: true
+        });
+    }
+
+    // GitHub Profile and Repos
+    if (profileCardContainer && reposContainer) {
+        fetch(`https://api.github.com/users/${githubUsername}`)
+            .then(response => response.json())
+            .then(data => {
+                const profileHTML = `
+                    <div class="profile-avatar">
+                        <img src="${data.avatar_url}" alt="GitHub Avatar">
+                    </div>
+                    <div class="profile-details">
+                        <h3><a href="${data.html_url}" target="_blank">${data.name || data.login}</a></h3>
+                        <p>${data.bio || 'No bio provided.'}</p>
+                        <div class="profile-stats">
+                            <span>${data.followers} Followers</span>
+                            <span>Following ${data.following}</span>
+                            <span>Public Repos: ${data.public_repos}</span>
+                        </div>
+                    </div>
+                `;
+                profileCardContainer.innerHTML = profileHTML;
+            })
+            .catch(error => profileCardContainer.innerHTML = `<p>Error loading GitHub profile.</p>`);
+
+        fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated`)
+            .then(response => response.json())
+            .then(data => {
+                let reposHTML = '';
+                data.slice(0, 6).forEach(repo => {
+                    reposHTML += `
+                        <div class="repo-card">
+                            <h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>
+                            <p>${repo.description || 'No description.'}</p>
+                            <div class="repo-stats">
+                                <span>${repo.language || 'N/A'}</span>
+                                <span>⭐ ${repo.stargazers_count}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                reposContainer.innerHTML = reposHTML;
+            })
+            .catch(error => reposContainer.innerHTML = `<p>Error loading repositories.</p>`);
     }
 });
