@@ -322,11 +322,6 @@ body.easter-egg-mode #back-to-top-btn:hover {
     transform: translateY(0);
 }
 
-/* 
-============================================
-    Responsive & Mobile Styles
-============================================
-*/
 .hamburger {
     display: none;
     cursor: pointer;
@@ -401,12 +396,6 @@ body.easter-egg-mode #back-to-top-btn:hover {
         text-align: center;
     }
 }
-
-/* 
-============================================
-    NEW GITHUB INTEGRATION STYLES
-============================================
-*/
 
 /* --- Profile Card --- */
 #github-profile-card {
