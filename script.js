@@ -3,17 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleButton = document.getElementById('theme-toggle-btn');
     const body = document.body;
 
-    // --- Easter Egg Variables ---
     let clickCount = 0;
     let clickTimer = null;
 
-    // A function to apply the theme based on what's in localStorage
     const applyTheme = (theme) => {
         if (theme === 'light') {
             body.classList.remove('easter-egg-mode');
             body.classList.add('light-mode');
             if (themeToggleButton) themeToggleButton.textContent = 'Dark Mode';
-        } else { // 'dark'
+        } else { 
             body.classList.remove('easter-egg-mode');
             body.classList.remove('light-mode');
             if (themeToggleButton) themeToggleButton.textContent = 'Light Mode';
@@ -52,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- BACK TO TOP BUTTON LOGIC ---
     const backToTopButton = document.getElementById('back-to-top-btn');
     if (backToTopButton) {
         window.onscroll = () => {
@@ -65,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
         backToTopButton.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
     }
     
-    // --- MOBILE NAVIGATION LOGIC ---
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     if (hamburger && navLinks) {
@@ -81,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- REPEATING SCROLL ANIMATION LOGIC ---
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
     if (revealElements.length > 0) {
         const observer = new IntersectionObserver((entries) => {
@@ -93,13 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
         revealElements.forEach(el => { observer.observe(el); });
     }
 
-    // --- GITHUB INTEGRATION (for index.html) ---
     const githubUsername = 'AlogiLupiee';
     const profileCardContainer = document.getElementById('github-profile-card');
     const reposContainer = document.getElementById('github-repos-container');
     const calendarContainer = document.querySelector('.calendar');
 
-    // GitHub Activity Calendar
     if (calendarContainer) {
         GitHubCalendar(".calendar", githubUsername, {
             responsive: true,
@@ -107,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // GitHub Profile and Repos
     if (profileCardContainer && reposContainer) {
         fetch(`https://api.github.com/users/${githubUsername}`)
             .then(response => response.json())
@@ -149,5 +141,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 reposContainer.innerHTML = reposHTML;
             })
             .catch(error => reposContainer.innerHTML = `<p>Error loading repositories.</p>`);
+    }
+
+    const cards = document.querySelectorAll('.tilt-card');
+
+    cards.forEach(card => {
+        const glare = card.querySelector('.card-glare');
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * -10; 
+            const rotateY = ((x - centerX) / centerX) * 10; 
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+
+            if (glare) {
+                glare.style.opacity = '1';
+                glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 80%)`;
+            }
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            if (glare) {
+                glare.style.opacity = '0';
+            }
+        });
+    });
+    const heroBg = document.getElementById('hero-bg');
+    const heroTitle = document.querySelector('.hero-title');
+    const heroWrapper = document.getElementById('hero-wrapper');
+
+    if (heroBg && heroWrapper) {
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY;
+            const heroHeight = heroWrapper.offsetHeight;
+
+            let opacity = 1 - (scrollPos / (heroHeight * 0.8));
+            
+            if (opacity < 0) opacity = 0;
+            if (opacity > 1) opacity = 1;
+
+            heroBg.style.opacity = opacity;
+            
+            if (heroTitle) {
+                heroTitle.style.opacity = opacity;
+                heroTitle.style.transform = `translateY(${scrollPos * 0.5}px)`;
+            }
+        });
     }
 });

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alogi - The Button Box</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="immersive-page">
+    <button id="back-to-top-btn" title="Go to top">▲</button>
+    
+    <header class="navbar">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="social.html">Socials</a></li>
+                <li><a href="projects.html" class="active">Achievements</a></li>
+                <li><button id="theme-toggle-btn">Light Mode</button></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <div id="hero-wrapper">
+        <img id="hero-bg" src="images/hero.jpg" alt="Racing Background">
+        
+        <div id="hero-overlay"></div>
+        <div class="hero-text-container">
+            <h1 class="hero-title">The Button Box</h1>
+            <p class="hero-subtitle">The Process of Building My Ultimate Racing Button Box</p>
+        </div>
+    </div>
+
+    <div class="container relative-container">
+        
+        <div class="float-block block-teal drift-1 reveal-on-scroll">
+            <h2><i class="fas fa-drafting-compass"></i> The Idea</h2>
+            <p>I had craved a button box for a long time. However, after looking online at the prices, I resigned... but not for long. I thought, "Maybe a little DIY wouldn't hurt?"</p>
+        </div>
+
+        <div class="float-block block-blue drift-2 reveal-on-scroll">
+            <h2><i class="fas fa-microchip"></i> The Logistics</h2>
+            <p>Next thing I know, I was out comparing microcontrollers. Which one to choose? My choice landed on the Raspberry Pi Pico 2W because of its Python support. I bought a few buttons, switches, and encoders.</p>
+        </div>
+
+        <div class="immersive-image-container drift-3 reveal-on-scroll" style="align-self: center;">
+            <a href="https://www.instagram.com/p/DL-rGYXNI56/" target="_blank">
+                <img src="images/parts.jpg" alt="Electronics Parts">
+            </a>
+            <span class="img-caption">The raw components</span>
+        </div>
+
+        <div class="float-block block-purple drift-3 reveal-on-scroll">
+            <h2><i class="fas fa-code"></i> The Struggle</h2>
+            <p>Written in CircuitPython. It started off easy but became more and more frustrating when I found out nothing was working. One evening, I got so overwhelmed that I just packed it up and threw it in my drawer.</p>
+        </div>
+
+        <div class="float-block block-white drift-1 reveal-on-scroll">
+            <h2><i class="fas fa-lightbulb"></i> The Enlightenment</h2>
+            <p>At the end of the summer, I sat down, took a deep breath, and opened the box. I found two YouTube videos doing the same thing I was. I tried the first code—it didn't work. My hopes were at an all-time low. As a last resort, I tried the second code. Surprise! It worked, although not perfectly.</p>
+        </div>
+
+        <div class="immersive-image-container drift-2 reveal-on-scroll" style="align-self: flex-start;">
+            <a href="https://www.instagram.com/p/DN5f4APCH_E/" target="_blank">
+                <img src="images/coding.jpg" alt="Coding">
+            </a>
+            <span class="img-caption">Back to the drawing board</span>
+        </div>
+
+        <div class="float-block block-green drift-2 reveal-on-scroll">
+            <h2><i class="fas fa-bolt"></i> The Assembly</h2>
+            <p>Finally, I got into the flow. One day, I gathered my focus and started soldering the elements together. Funny enough, it worked the first time. Maybe it was pure skill?</p>
+        </div>
+
+        <div class="float-block block-orange drift-3 reveal-on-scroll">
+            <h2><i class="fas fa-road"></i> The Final Touches</h2>
+            <p>I tucked it all inside the box the parts were shipped in. It's finally finished!</p>
+        </div>
+
+        <div class="immersive-image-container drift-1 reveal-on-scroll" style="align-self: flex-end;">
+            <a href="https://www.instagram.com/p/DN-orZFiGA8/?img_index=2" target="_blank">
+                <img src="images/finished.jpg" alt="Finished Box">
+            </a>
+            <span class="img-caption">The result</span>
+        </div>
+
+        <div class="float-block block-red drift-1 reveal-on-scroll">
+            <h2><i class="fas fa-flag-checkered"></i> The Future</h2>
+            <p>I painted it black and hot-glued the wires onto the box. In the future, I'm planning other big projects! Follow me for more... See ya!</p>
+        </div>
+
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <script src="script.js"></script>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2025 Alogi. All Rights Reserved.</p>
+            <p style="font-size: 0.8em; margin-top: 10px; opacity: 0.7;">Yes, the tiles are moving, you're okay.</p>
+        </div>
+    </footer>
+</body>
+</html>
