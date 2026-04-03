@@ -174,15 +174,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    
+    // --- UPDATED IMMERSIVE HERO LOGIC ---
     const heroBg = document.getElementById('hero-bg');
-    const heroTitle = document.querySelector('.hero-title');
+    const heroTitle = document.querySelector('.hero-title'); // Selects the title
+    const heroSubtitle = document.querySelector('.hero-subtitle'); // Selects the subtitle (if you want to fade it too)
     const heroWrapper = document.getElementById('hero-wrapper');
+    const floatingBtn = document.getElementById('floating-github-btn');
 
     if (heroBg && heroWrapper) {
         window.addEventListener('scroll', () => {
             const scrollPos = window.scrollY;
             const heroHeight = heroWrapper.offsetHeight;
 
+            // Opacity Logic
             let opacity = 1 - (scrollPos / (heroHeight * 0.8));
             
             if (opacity < 0) opacity = 0;
@@ -192,7 +197,18 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (heroTitle) {
                 heroTitle.style.opacity = opacity;
-                heroTitle.style.transform = `translateY(${scrollPos * 0.5}px)`;
+            }
+            if (heroSubtitle) {
+                heroSubtitle.style.opacity = opacity;
+            }
+
+            // Button Docking Logic
+            if (floatingBtn) {
+                if (scrollPos > heroHeight * 0.4) {
+                    floatingBtn.classList.add('docked-left');
+                } else {
+                    floatingBtn.classList.remove('docked-left');
+                }
             }
         });
     }
